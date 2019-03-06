@@ -19,7 +19,7 @@ plot_data %>%
   geom_col() +
   geom_hline(yintercept = 1, linetype = "dashed", col = "red") +
   theme_economist_white() +
-  labs(title = "The pay gap for Female workers spans industries",
+  labs(title = "Female wages as a % of Male wages by Industry",
        subtitle = "100% = pay parity",
        x = "",
        y = "Percent") +
