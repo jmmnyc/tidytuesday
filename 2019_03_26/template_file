@@ -1,0 +1,43 @@
+install.packages("zipcode")
+install.packages("ggmap")
+
+library(tidyverse)
+library(zipcode)
+library(lubridate)
+library(ggthemes)
+library(ggmap)
+
+
+data("zipcode")
+
+seattle_pets <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-03-26/seattle_pets.csv")
+
+str(seattle_pets)
+
+seattle_pets_2 <- merge(seattle_pets, zipcode, by.x= "zip_code", by.y = "zip")
+
+seattle_pets_2$license_issue_date <- mdy(seattle_pets_2$license_issue_date)
+
+seattle_pets_2$Year <- year(seattle_pets_2$license_issue_date)
+
+head(seattle_pets_2)
+
+plot_data <- seattle_pets_2 %>% 
+  filter(species %in% c("Cat", "Dog"), !is.na(zip_code), city == "Seattle") %>% 
+  group_by(species, animals_name) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count))
+
+map <- openmap(c(47.6062,122.3321),c(47.6062,122.3321), png(width = 750, height = 750))
+
+
+devtools::install_github("dkahle/ggmap", ref = "tidyup")
+library(ggmap)
+chicago <- get_stamenmap(bbox = c(left = -88.0225, bottom = 41.5949, 
+                                  right = -87.2713, top = 42.0677), 
+                         zoom = 11)
+
+ggmap(chicago)
+
+
+ggmap(map) + geom_point(aes(x = longitude, y = latitude, size =(count)), data = plot_data, alpha = .5)
