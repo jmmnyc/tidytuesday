@@ -42,9 +42,9 @@ plot_data <- bike_traffic %>%
 
 plot <- plot_data %>% 
   ggplot(aes(x = hour, y = total_bikes/1000)) +
-  geom_line(color = "#bc5652", size = 1.5) +
-  facet_grid(cols = vars(crossing),
-             rows = vars(weekday_ind),
+  geom_line(color = "#bc5652", size = 1) +
+  facet_grid(rows = vars(crossing),
+             cols = vars(weekday_ind),
              scales = "free_y",
              labeller = labeller(crossing = label_wrap_gen(24))) +
   theme(strip.text.x = element_text(angle = 0, hjust = 0, size = 10)) +
