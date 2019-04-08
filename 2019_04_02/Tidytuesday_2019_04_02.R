@@ -33,7 +33,7 @@ plot_data <- bike_traffic %>%
          date_only = date(date_time),
          year = year(date_time),
          weekday = wday(date_time, label = TRUE),
-         weekday_ind = ifelse(weekday %in% c("Sat", "Sun"), "Weekendd", "Weekdays"),
+         weekday_ind = ifelse(weekday %in% c("Sat", "Sun"), "Weekend", "Weekdays"),
          hour = hour(date_time),
          bikes = sum(bike_count, na.rm = TRUE)) %>% 
   filter(year == '2018') %>% 
