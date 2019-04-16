@@ -1,8 +1,5 @@
 library(tidyverse)
-library(gganimate)
-library(gifski)
 library(ggthemes)
-library(ggrepel)
 library(RColorBrewer)
 
 player_dob <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-04-09/player_dob.csv")
