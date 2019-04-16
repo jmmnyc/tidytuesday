@@ -49,7 +49,7 @@ over_10_wins <- age_slams_comb %>%
   mutate(rank = dense_rank(max_total_wins)) %>% 
   ungroup()
 
-brewer.pal((n=5, name = "Set1"))
+brewer.pal(n=5, name = "Set1")
 
 color_map <- data.frame(rank = c(1:5), 
                         color = c("#E41A1c", "#377EB8", "#4DAF4A", "#984EA3", "#FF7F00"))
@@ -66,11 +66,11 @@ plot_data <- age_slams_rank %>%
       rank == "4" ~ "4", 
       rank == "5" ~ "5",
       T ~ "other")
-    ) 
-                      
+  ) 
 
 
-  ggplot(data = plot_data, aes(age, total_wins, group = name, col = line_col)) +
+
+ggplot(data = plot_data, aes(age, total_wins, group = name, col = line_col)) +
   geom_step(alpha = 0.6) +
   geom_point(data = plot_data %>% 
                group_by(name) %>% 
@@ -90,7 +90,3 @@ plot_data <- age_slams_rank %>%
   scale_color_manual(values = c("#FF7F00", "#984EA3", "#4DAF4A", "#377EB8", "#E41A1c", "#7f7f7f")) +
   theme(strip.text.x = element_text(size = 14, color = "black")) +
   theme(legend.position = "none") 
-
-  
-  #transition_reveal(age_years)
-  
