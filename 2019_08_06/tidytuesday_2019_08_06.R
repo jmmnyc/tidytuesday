@@ -41,7 +41,7 @@ plot_data <- bob_ross %>%
   mutate(Season = str_extract(Season, "[:digit:]+")) %>% 
   mutate_at(vars(Season, Episode), as.integer)
 
-# import image of Naruto eating ramen
+# import image of Simpsons Aurora Borealis
 img <- png::readPNG("auroraborealis.png")
 
 rast <- grid::rasterGrob(img, interpolate = T)
@@ -52,10 +52,10 @@ plot_data %>%
   geom_line() +
   annotation_custom(rast, ymin = 0.2, ymax = 0.8, xmin = 10) +
   scale_y_continuous(breaks = c(0,1)) +
-  labs(title = "Only 2 Episodes feature Aurora Borealis aka Northern Lights",
-       subtitle = "The paintings had many common elements including cabin, conifer, lake, snow and trees",
-       x = "Aurora Borealis",
-       y = "Season",
+  labs(title = "Number of Bob Ross paintings that include Aurora Borealis",
+       subtitle = "Only 2 Episodes feature Aurora Borealis aka Northern Lights \nThe paintings had many common elements including a cabin, conifer, lake, snow and trees",
+       x = "Season",
+       y = "Number of paintings",
        caption = "Source: 538 \nVisualization by Jose M @Joseph_Mike")
 
 ggsave("TidyTuesday_2019_08_06.png", width = 10, height = 6.5,device = "png", type = "cairo")
